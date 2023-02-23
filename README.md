@@ -89,7 +89,6 @@ If you want to allow adding an item based on the search when no items have been 
         return await Task.FromResult(Films.Where(
                      x => x.Title.ToLower().Contains(searchText.ToLower())).ToList());
     }
-
 }
 ```
 
@@ -131,7 +130,6 @@ The `SelectedTemplate` is used to display the selected item and the `ResultTempl
                              $"https://allfilms.com/api/films/?title={searchText}");
         return response;
     }
-
 }
 ```
 
