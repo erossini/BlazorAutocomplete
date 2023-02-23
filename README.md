@@ -2,7 +2,11 @@
 
 The Autocomplete for Blazor component offers simple and flexible autocomplete type-ahead functionality for [Blazor WebAssembly](https://www.puresourcecode.com/tag/blazor-webassembly/) and [Blazor Server](https://www.puresourcecode.com/tag/blazor-server/). The components is build with [NET6](https://www.puresourcecode.com/tag/net6/).
 
-## Installing
+For more details about this component, please see this post on [PureSourceCode.com]. If you need support for this component or you have a suggestion or comment, please use my [Forum](https://www.puresourcecode.com/forum/autocomplete-blazor/).
+
+## Usage 
+
+### 1. Install
 
 You can install from NuGet using the following command:
 
@@ -10,10 +14,8 @@ You can install from NuGet using the following command:
 
 Or via the Visual Studio package manger.
 
-## Setup
-Blazor Server applications will need to include the following CSS and JS files in their `_Host.cshtml` .
-
-Blazor Client applications will need to include the following CSS and JS files in their `Index.html` .
+## 2. Add using to your project
+Blazor Server applications will need to include the following CSS and JS files in their `_Host.cshtml`. Alternative, Blazor Client applications will need to include the following CSS and JS files in their `Index.html` .
 
 In the `head` tag add the following CSS.
 
@@ -33,10 +35,8 @@ I would also suggest adding the following using statement to your main `_Imports
 @using PSC.Blazor.Components.AutoComplete
 ```
 
-## Usage
-The component can be used standalone or as part of a form. When used in a form the control fully integrates with Blazors forms and authentication system.
-
-Below is a list of all the options available on the AutoComplete.
+## Options
+The component can be used standalone or as part of a form. When used in a form the control fully integrates with Blazors forms and authentication system. Below is a list of all the options available on the AutoComplete.
 
 ### Templates
 
@@ -55,20 +55,14 @@ Below is a list of all the options available on the AutoComplete.
 - `EnableDropDown` (Optional - Default: `false`) - Allows the control to behave as a dropdown
 - `DisableClear` (Optional - Default : `false`) - Hides the clear button from the AutoComplete. Users can still change the selection by clicking on the current selection and typing however, they can't clear the control entirely.'
 - `ShowDropDownOnFocus` (Optional - Default: `false`) - When enabled, will show the suggestions dropdown automatically when the control is in search mode. If the control has a current value then the user would need to press the enter key first to enter search mode.
-- `StopPropagation` (Optional - Default: `false`) - Control the StopPropagation behavior of the input of this component. See https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#stop-event-propagation
-- `PreventDefault` (Optional - Default: `false`) - Control the PreventDefault behavior of the input of this component. See https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#prevent-default-actions
+- `StopPropagation` (Optional - Default: `false`) - Control the StopPropagation behavior of the input of this component. See this [Microsoft document](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#stop-event-propagation)
+- `PreventDefault` (Optional - Default: `false`) - Control the PreventDefault behavior of the input of this component. See this [MIcrosoft document](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#prevent-default-actions)
 
-The control also requires a `SearchMethod` to be provided with the following signature `Task<IEnumerable<TItem>>(string searchText)`. The control will invoke this method 
-passing the text the user has typed into the control. You can then query your data source and return the result as an `IEnumerable` for the control to render.
+The control also requires a `SearchMethod` to be provided with the following signature `Task<IEnumerable<TItem>>(string searchText)`. The control will invoke this method passing the text the user has typed into the control. You can then query your data source and return the result as an `IEnumerable` for the control to render.
 
-If you wish to bind the result of the selection in the control to a different type than the type used in the search this is also possible. For example, if you passed in a list
-of `Person` but when a `Person` was selected you wanted the control to bind to an `int` value which might be the `Id` of the selected `Person`, you can achieve this by providing
-a `ConvertMethod` The convert method will be invoked by the control when a selection is made and will be passed the type selected. The method will need to handle the conversion
-and return the new type.
+If you wish to bind the result of the selection in the control to a different type than the type used in the search this is also possible. For example, if you passed in a list of `Person` but when a `Person` was selected you wanted the control to bind to an `int` value which might be the `Id` of the selected `Person`, you can achieve this by providing a `ConvertMethod` The convert method will be invoked by the control when a selection is made and will be passed the type selected. The method will need to handle the conversion and return the new type.
 
-If you want to allow adding an item based on the search when no items have been found, you can achieve this by providing the `AddItemOnEmptyResultMethod` as a parameter.
-This method will make the `NotFoundTemplate` selectable the same way a item would normally be, and will be invoked when the user selects the `NotFoundTemplate`.
-This method passes the `SearchText` and expects a new item to be returned.
+If you want to allow adding an item based on the search when no items have been found, you can achieve this by providing the `AddItemOnEmptyResultMethod` as a parameter. This method will make the `NotFoundTemplate` selectable the same way a item would normally be, and will be invoked when the user selects the `NotFoundTemplate`. This method passes the `SearchText` and expects a new item to be returned.
 
 ### Local Data Example
 
@@ -92,18 +86,14 @@ This method passes the `SearchText` and expects a new item to be returned.
 
     private async Task<IEnumerable<Film>> SearchFilms(string searchText) 
     {
-        return await Task.FromResult(Films.Where(x => x.Title.ToLower().Contains(searchText.ToLower())).ToList());
+        return await Task.FromResult(Films.Where(
+                     x => x.Title.ToLower().Contains(searchText.ToLower())).ToList());
     }
 
 }
 ```
 
-In the example above, the component is setup with the minimum requirements.
-You must provide a method which has the following signature `Task<IEnumerable<T> MethodName(string searchText)`, 
-to the `SearchMethod` parameter. The control will call this method with the current search text everytime the 
-debounce timer expires (default: 300ms). You must also set a value for the `Value` parameter. 
-This will be populated with the item selected from the search results. 
-As this version of the control is integrated with Blazors built-in forms and validation, it must be wrapped in a `EditForm` component.
+In the example above, the component is setup with the minimum requirements. You must provide a method which has the following signature `Task<IEnumerable<T> MethodName(string searchText)`, to the `SearchMethod` parameter. The control will call this method with the current search text everytime the debounce timer expires (default: 300ms). You must also set a value for the `Value` parameter. This will be populated with the item selected from the search results. As this version of the control is integrated with Blazors built-in forms and validation, it must be wrapped in a `EditForm` component.
 
 The component requires two templates to be provided:
 
@@ -117,9 +107,9 @@ The `SelectedTemplate` is used to display the selected item and the `ResultTempl
 ```cs
 @inject HttpClient httpClient
 
-<BlazoredAutoComplete SearchMethod="@SearchFilms"
-                      @bind-Value="@SelectedFilm"
-                      Debounce="500">
+<AutoComplete SearchMethod="@SearchFilms"
+              @bind-Value="@SelectedFilm"
+              Debounce="500">
     <SelectedTemplate>
         @context.Title
     </SelectedTemplate>
@@ -129,7 +119,7 @@ The `SelectedTemplate` is used to display the selected item and the `ResultTempl
     <NotFoundTemplate>
         Sorry, there weren't any search results.
     </NotFoundTemplate>
-</BlazoredAutoComplete>
+</AutoComplete>
 
 @code {
 
@@ -137,20 +127,19 @@ The `SelectedTemplate` is used to display the selected item and the `ResultTempl
 
     private async Task<IEnumerable<Film>> SearchFilms(string searchText) 
     {
-        var response = await httpClient.GetJsonAsync<IEnumerable<Film>>($"https://allfilms.com/api/films/?title={searchText}");
+        var response = await httpClient.GetJsonAsync<IEnumerable<Film>>(
+                             $"https://allfilms.com/api/films/?title={searchText}");
         return response;
     }
 
 }
 ```
 
-Because you provide the search method to the component, making a remote call is really straight-forward. 
-In this example, the `Debounce` parameter has been upped to 500ms and the `NotFoundTemplate` has been specified.
+Because you provide the search method to the component, making a remote call is really straight-forward. In this example, the `Debounce` parameter has been upped to 500ms and the `NotFoundTemplate` has been specified.
 
 ### Subscribing to changes in selected values
-It is common to want to be able to know when a value bound to the AutoComplete changes. 
-To do this you can't use the standard `@bind-Value` or `@bind-Values` syntax, you must handle the change event manually. 
-To do this you must specify the following parameters:
+
+It is common to want to be able to know when a value bound to the AutoComplete changes. To do this you can't use the standard `@bind-Value` or `@bind-Values` syntax, you must handle the change event manually. To do this you must specify the following parameters:
 
 - Value
 - ValueChanged
@@ -191,10 +180,10 @@ The code below shows an example of how these parameters should be used.
 There are times when you will want to use complex types with the AutoComplete but only bind a certain property of that type. For example, you may want to search against a `Person` but once a person is selected, only bind to it's `Id` property. In order to do this you will need to implement the following:
 
 ```razor
-<BlazoredAutoComplete SearchMethod="GetPeopleLocal"
-                      ConvertMethod="ConvertPerson"
-                      @bind-Value="SelectedPersonId"
-                      placeholder="Search by first name...">
+<AutoComplete SearchMethod="GetPeopleLocal"
+              ConvertMethod="ConvertPerson"
+              @bind-Value="SelectedPersonId"
+              placeholder="Search by first name...">
     <SelectedTemplate Context="personId">
         @{
             var selectedPerson = LoadSelectedPerson(personId);
@@ -205,7 +194,7 @@ There are times when you will want to use complex types with the AutoComplete bu
     <ResultTemplate Context="person">
         @person.Firstname @person.Lastname (Id: @person.Id)
     </ResultTemplate>
-</BlazoredAutoComplete>
+</AutoComplete>
 
 @code {
     private List<Person> People = new List<Person>();
@@ -221,7 +210,8 @@ There are times when you will want to use complex types with the AutoComplete bu
 
     private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText)
     {
-        return await Task.FromResult(People.Where(x => x.Firstname.ToLower().Contains(searchText.ToLower())).ToList());
+        return await Task.FromResult(People.Where(x => 
+            x.Firstname.ToLower().Contains(searchText.ToLower())).ToList());
     }
 
     private int? ConvertPerson(Person person) => person?.Id;
