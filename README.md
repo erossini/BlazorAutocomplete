@@ -1,6 +1,6 @@
 # AutoComplete for Blazor 
 
-The Autocomplete for Blazor component offers simple and flexible type-ahead functionality.
+The Autocomplete for Blazor component offers simple and flexible autocomplete type-ahead functionality for [Blazor WebAssembly](https://www.puresourcecode.com/tag/blazor-webassembly/) and [Blazor Server](https://www.puresourcecode.com/tag/blazor-server/). The components is build with [NET6](https://www.puresourcecode.com/tag/net6/).
 
 ## Installing
 
