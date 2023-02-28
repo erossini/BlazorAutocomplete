@@ -6,6 +6,10 @@ For more details about this component, please see this post on [PureSourceCode.c
 
 ![autocomplete-blazor-component](https://user-images.githubusercontent.com/9497415/221885675-c3fc3146-ac13-4fe6-8305-f6d4f396c8bd.gif)
 
+Now, I added the support for custom design to have more stylish autocomplete.
+
+![autocomplete-stylish-blazor-component](https://user-images.githubusercontent.com/9497415/221886559-9c599c58-8be8-43cf-af9c-dab354679a8d.gif)
+
 ## Usage 
 
 ### 1. Install
