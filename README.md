@@ -4,6 +4,8 @@ The Autocomplete for Blazor component offers simple and flexible autocomplete ty
 
 For more details about this component, please see this post on [PureSourceCode.com]. If you need support for this component or you have a suggestion or comment, please use my [Forum](https://www.puresourcecode.com/forum/autocomplete-blazor/).
 
+![autocomplete-blazor-component](https://user-images.githubusercontent.com/9497415/221885675-c3fc3146-ac13-4fe6-8305-f6d4f396c8bd.gif)
+
 ## Usage 
 
 ### 1. Install
