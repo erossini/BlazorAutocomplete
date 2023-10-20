@@ -1,0 +1,46 @@
+﻿@page "/stylish"
+
+<h3>Stylish</h3>
+
+<Autocomplete SearchMethod="GetTagLocal"
+              @bind-Values="_selectedTag"
+              Disabled="_isDisabledMulti"
+              EnableDropDown="true"
+              placeholder="Search by first name..."
+              ResultContainerCSS="tag-container"
+              ResultItemCSS="tag-item">
+    <SelectedTemplate Context="tag">
+        @tag.TagName
+    </SelectedTemplate>
+    <ResultTemplate Context="tag">
+        <div class="tag-result-item-container">
+            <div class="tag-result-item">
+                <div class="tag-label">@tag.TagName</div>
+                <div class="tag-count">@tag.TagCount</div>
+            </div>
+            <div class="tag-result-item-description">
+                @tag.TagDescription
+            </div>
+        </div>
+    </ResultTemplate>
+</Autocomplete>
+
+@if (_selectedTag != null)
+{
+    <p>Selected tags:</p>
+
+    foreach (var t in _selectedTag)
+    {
+        <p>@t.TagName (Id: @t.Id)</p>
+    }
+    <hr />
+}
+
+@code {
+    [Inject] public LanguageService _service { get; set; }
+
+    private bool _isDisabledMulti;
+    private IList<Tag>? _selectedTag;
+
+    private async Task<IEnumerable<Tag>> GetTagLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}

@@ -1,0 +1,39 @@
+﻿@page "/multiselect"
+
+<h3>Multiselect</h3>
+
+<Autocomplete SearchMethod="GetPeopleLocal"
+              @bind-Values="_selectedPeople"
+              Disabled="_isDisabledMulti"
+              EnableDropDown="true"
+              placeholder="Search by first name...">
+    <SelectedTemplate Context="person">
+        @person.Firstname
+    </SelectedTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname (Id: @person.Id)
+    </ResultTemplate>
+</Autocomplete>
+
+<button class="btn btn-primary" style="margin-top: 20px;" @onclick="@(() => _isDisabledMulti = !_isDisabledMulti)">@(_isDisabledMulti ? "Enable" : "Disable")</button>
+
+<hr />
+
+@if (_selectedPeople != null)
+{
+    <p>Selected People:</p>
+    foreach (var person in _selectedPeople)
+    {
+        <p>@person.Firstname @person.Lastname</p>
+    }
+    <hr />
+}
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private bool _isDisabledMulti;
+    private IList<Person>? _selectedPeople;
+
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}

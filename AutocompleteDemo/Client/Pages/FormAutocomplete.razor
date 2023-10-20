@@ -1,0 +1,43 @@
+﻿@page "/formautocomplete"
+
+<h3>Autocomplete in a Form</h3>
+
+<EditForm Model="_formModel" OnValidSubmit="HandleFormSubmit">
+    <DataAnnotationsValidator />
+
+    <Autocomplete SearchMethod="GetPeopleLocal"
+                       @bind-Value="_formModel.SelectedPerson"
+                       EnableDropDown="true"
+                       placeholder="Search by first name..."
+                  @ref="_localAutocomplete">
+        <SelectedTemplate Context="person">
+            @person.Firstname
+        </SelectedTemplate>
+        <ResultTemplate Context="person">
+            @person.Firstname @person.Lastname
+        </ResultTemplate>
+    </Autocomplete>
+    <ValidationMessage For="@(() => _formModel.SelectedPerson)" />
+
+    <button class="btn btn-primary" type="submit" style="margin-top: 20px;">Submit</button>
+    <button class="btn btn-info" type="button" style="margin-top: 20px" @onclick="@(_ => _localAutocomplete.Focus())">Focus</button>
+</EditForm>
+
+<hr />
+
+@if (_formModel.SelectedPerson != null)
+{
+    <br />
+    <p><strong>Selected Person:</strong> @_formModel.SelectedPerson.Firstname @_formModel.SelectedPerson.Lastname</p>
+}
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private readonly FormExample _formModel = new();
+    private Autocomplete<Person, Person> _localAutocomplete = default!;
+
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+
+    private static void HandleFormSubmit() => Console.WriteLine("Form Submitted Successfully!");
+}

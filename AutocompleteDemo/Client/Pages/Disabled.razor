@@ -1,0 +1,26 @@
+﻿@page "/disabled"
+
+<h3>Disabled</h3>
+
+<Autocomplete SearchMethod="@GetPeopleLocal"
+              @bind-Value="@_selectedPerson"
+              Disabled="_isDisabled"
+              placeholder="Search by first name...">
+    <SelectedTemplate Context="person">
+        @person.Firstname
+    </SelectedTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname
+    </ResultTemplate>
+</Autocomplete>
+
+<button class="btn btn-primary" style="margin-top: 20px;" @onclick="@(() => _isDisabled = !_isDisabled)">@(_isDisabled ? "Enable" : "Disable")</button>
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private bool _isDisabled = true;
+    private Person? _selectedPerson;
+
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}

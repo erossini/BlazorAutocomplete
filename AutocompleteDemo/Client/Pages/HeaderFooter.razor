@@ -1,0 +1,41 @@
+﻿@page "/headerfooter"
+
+<h3>Header and Footer</h3>
+
+<Autocomplete SearchMethod="GetPeopleLocal"
+                   @bind-Value="_selectedPerson"
+                   placeholder="Search by first name...">
+    <SelectedTemplate Context="person">
+        @person.Firstname
+    </SelectedTemplate>
+    <HeaderTemplate>
+        Header template
+    </HeaderTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname
+    </ResultTemplate>
+    <FooterTemplate>
+        Footer template
+    </FooterTemplate>
+</Autocomplete>
+
+<hr />
+
+@if (_selectedPersonId is > 0)
+{
+    <p>Selected Person Id: @_selectedPersonId</p>
+}
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private Person? _selectedPerson;
+    private int? _selectedPersonId;
+
+    protected override void OnInitialized()
+    {
+        _selectedPerson = new Person(12, "Charles", "The Great", 66, "Belgium");
+    }
+
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}

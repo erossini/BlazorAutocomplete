@@ -1,0 +1,47 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h2>TagBuilder component</h2>
+
+<TagBuilder />
+
+<br />
+
+<h2>Autocomplete component</h2>
+
+<Autocomplete SearchMethod="GetPeopleLocal"
+              @bind-Values="_selectedPeopleWithNotFoundTemplate"
+              Disabled="_isDisabledMulti"
+              EnableDropDown="true"
+              MinimumLength="2"
+              AddItemOnEmptyResultMethod="ItemAddedMethod"
+              placeholder="Search by first name...">
+    <SelectedTemplate Context="person">
+        @person.Firstname
+    </SelectedTemplate>
+    <HelpTemplate>
+        Please enter a minimum of 2 characters to perform a search.
+    </HelpTemplate>
+    <NotFoundTemplate Context="searchText">
+        Add "@searchText" as a new user <br />
+        The newly added user will be selected after being added.
+    </NotFoundTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname (Id: @person.Id)
+    </ResultTemplate>
+</Autocomplete>
+
+<button class="btn btn-primary" style="margin-top: 20px;" @onclick="@(() => _isDisabledMulti = !_isDisabledMulti)">@(_isDisabledMulti ? "Enable" : "Disable")</button>
+
+<hr />
+
+@if (_selectedPeopleWithNotFoundTemplate != null)
+{
+    <p>Selected People:</p>
+    foreach (var person in _selectedPeopleWithNotFoundTemplate)
+    {
+        <p>@person.Firstname @person.Lastname</p>
+    }
+    <hr />
+}

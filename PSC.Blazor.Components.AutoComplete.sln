@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33417.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1C332B17-3E14-4BFC-9622-625FF6B2DC7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other files", "Other files", "{AD6DA7D2-4C09-486D-B6F7-4B811A312BC0}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSC.Blazor.Components.AutoComplete", "src\PSC.Blazor.Components.AutoComplete.csproj", "{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{74B2BCDD-A393-4516-81AB-F8F1C819E490}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutocompleteDemo.Server", "AutocompleteDemo\Server\AutocompleteDemo.Server.csproj", "{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutocompleteDemo.Client", "AutocompleteDemo\Client\AutocompleteDemo.Client.csproj", "{1F8F7950-067D-4434-A1AF-F48BDC299B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutocompleteDemo.Shared", "AutocompleteDemo\Shared\AutocompleteDemo.Shared.csproj", "{F5B58087-B626-4A34-A6E0-B10088EE6E99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8F7950-067D-4434-A1AF-F48BDC299B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8F7950-067D-4434-A1AF-F48BDC299B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8F7950-067D-4434-A1AF-F48BDC299B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8F7950-067D-4434-A1AF-F48BDC299B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B58087-B626-4A34-A6E0-B10088EE6E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B58087-B626-4A34-A6E0-B10088EE6E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B58087-B626-4A34-A6E0-B10088EE6E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B58087-B626-4A34-A6E0-B10088EE6E99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D37CB8DA-3F44-4F86-A3FA-3F7355BD1E05} = {1C332B17-3E14-4BFC-9622-625FF6B2DC7E}
+		{A52342A1-57A7-4FEE-BAEC-1BB9B7D787A0} = {74B2BCDD-A393-4516-81AB-F8F1C819E490}
+		{1F8F7950-067D-4434-A1AF-F48BDC299B03} = {74B2BCDD-A393-4516-81AB-F8F1C819E490}
+		{F5B58087-B626-4A34-A6E0-B10088EE6E99} = {74B2BCDD-A393-4516-81AB-F8F1C819E490}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {054BE298-D4E5-4B33-ABAC-EC19C562E96D}
+	EndGlobalSection
+EndGlobal

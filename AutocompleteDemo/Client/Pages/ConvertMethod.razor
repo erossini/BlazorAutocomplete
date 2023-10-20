@@ -1,0 +1,36 @@
+﻿@page "/convertmethod"
+
+<h3>Convert Method</h3>
+
+<Autocomplete SearchMethod="GetPeopleLocal"
+                   ConvertMethod="ConvertPerson"
+                   @bind-Value="_selectedPersonId"
+                   placeholder="Search by first name...">
+    <SelectedTemplate Context="personId">
+        @{
+            var selectedPerson = _service.LoadSelectedPerson(personId);
+
+            <text>@selectedPerson?.Firstname @selectedPerson?.Lastname</text>
+        }
+    </SelectedTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname (Id: @person.Id)
+    </ResultTemplate>
+</Autocomplete>
+
+<hr />
+
+@if (_selectedPersonId is > 0)
+{
+    <p>Selected Person Id: @_selectedPersonId</p>
+}
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private int? _selectedPersonId;
+    
+    private static int? ConvertPerson(Person? person) => person?.Id;
+    
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}

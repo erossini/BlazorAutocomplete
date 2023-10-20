@@ -1,0 +1,34 @@
+﻿@page "/standalone"
+
+<h3>Standalone</h3>
+
+<Autocomplete SearchMethod="GetPeopleLocal"
+              @bind-Value="_selectedPerson"
+              placeholder="Search by first name...">
+    <SelectedTemplate Context="person">
+        @person.Firstname
+    </SelectedTemplate>
+    <ResultTemplate Context="person">
+        @person.Firstname @person.Lastname
+    </ResultTemplate>
+</Autocomplete>
+
+<hr />
+
+@if (_selectedPerson != null)
+{
+    <p>Selected: @_selectedPerson.Firstname @_selectedPerson.Lastname</p>
+}
+
+@code {
+    [Inject] public PeopleService _service { get; set; }
+
+    private Person? _selectedPerson;
+
+    protected override void OnInitialized()
+    {
+        _selectedPerson = new Person(12, "Charles", "The Great", 66, "Belgium");
+    }
+
+    private async Task<IEnumerable<Person>> GetPeopleLocal(string searchText) => await _service.GetPeopleLocal(searchText);
+}
